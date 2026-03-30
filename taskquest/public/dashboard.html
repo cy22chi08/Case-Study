@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TaskQuest</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">⚔ TaskQuest</div>
+
+        <!-- PROFILE CARD -->
+        <div class="profile-card">
+            <img id="avatar" src="images/default.png" class="avatar">
+            <h3 id="name">Hero</h3>
+            <p id="classText">Class: None</p>
+
+            <div class="stat">
+                Level <span id="level">1</span>
+            </div>
+
+            <div class="stat">
+                XP <span id="xp">0</span>
+            </div>
+
+            <div class="xp-bar">
+                <div id="xpFill"></div>
+            </div>
+
+            <small id="xpText">0 / 100 XP</small>
+        </div>
+
+        <button class="logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <h1>🎯 Your Quests</h1>
+
+       <div class="task-actions">
+
+    <div class="task-dropdown">
+        <button type="button" onclick="toggleTaskMenu()">+ Add Task</button>
+
+        <div id="taskMenu" class="dropdown-menu hidden">
+            <div onclick="openModal('todo')">📌 To-Do</div>
+            <div onclick="openModal('daily')">🔁 Daily</div>
+            <div onclick="openModal('habit')">⚡ Habit</div>
+        </div>
+    </div>
+
+    <button class="complete-btn" onclick="completeSelectedTasks()">
+        Complete Selected
+    </button>
+
+</div>
+
+        <!-- TO-DO TASKS -->
+        <section class="panel">
+            <h2>📌 To-Do Tasks</h2>
+            <ul id="todoList"></ul>
+        </section>
+
+        <!-- DAILY TASKS -->
+        <section class="panel">
+            <h2>🔁 Daily Tasks</h2>
+            <ul id="dailyList"></ul>
+        </section>
+
+        <!-- HABIT TASKS -->
+        <section class="panel">
+            <h2>⚡ Habit Tasks</h2>
+            <ul id="habitList"></ul>
+        </section>
+
+
+        <!-- HISTORY -->
+        <section class="panel">
+            <h2>📜 History</h2>
+            <ul id="historyList"></ul>
+        </section>
+
+    </main>
+
+    <!-- TASK MODAL -->
+    <div id="taskModal" class="modal hidden">
+<div class="modal-content">
+
+    <h2 id="modalTitle">Create Task</h2>
+
+    <!-- 🔥 ADD THIS WRAPPER -->
+    <div class="modal-scroll">
+
+        <!-- CATEGORY (IMPORTANT) -->
+        <input type="hidden" id="taskCategory">
+
+        <!-- TITLE -->
+        <input id="taskTitle" placeholder="Title">
+
+        <!-- NOTES -->
+        <textarea id="taskNotes" class="modal-textarea" placeholder="Notes"></textarea>
+
+        <!-- CHECKLIST -->
+        <div class="checklist-box">
+            <h4>Checklist</h4>
+            <div id="checklistContainer"></div>
+            <button type="button" onclick="addChecklistItem()">+ Add Item</button>
+        </div>
+
+        <!-- DIFFICULTY -->
+        <select id="difficulty">
+            <option value="">Select Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <!-- DUE DATE -->
+        <input type="date" id="dueDate">
+
+        <!-- TAGS -->
+        <div class="tags" id="tagContainer">
+            <button type="button" onclick="selectTag('quick', this)">Quick Task</button>
+            <button type="button" onclick="selectTag('routine', this)">Routine Task</button>
+            <button type="button" onclick="selectTag('focus', this)">Focus Session</button>
+        </div>
+
+        <!-- DAILY OPTIONS -->
+        <div id="dailyOptions" class="hidden">
+            <select id="repeatType">
+                <option value="">Repeat Type</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+            </select>
+
+            <div id="repeatDays">
+                <p>Repeat On:</p>
+                <div class="days">
+                    <button type="button" onclick="toggleDay('sun', this)">Sun</button>
+                    <button type="button" onclick="toggleDay('mon', this)">Mon</button>
+                    <button type="button" onclick="toggleDay('tue', this)">Tue</button>
+                    <button type="button" onclick="toggleDay('wed', this)">Wed</button>
+                    <button type="button" onclick="toggleDay('thu', this)">Thu</button>
+                    <button type="button" onclick="toggleDay('fri', this)">Fri</button>
+                    <button type="button" onclick="toggleDay('sat', this)">Sat</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HABIT OPTIONS -->
+        <div id="habitOptions" class="hidden">
+            <button type="button" onclick="setHabit('positive', this)">Positive</button>
+            <button type="button" onclick="setHabit('negative', this)">Negative</button>
+        </div>
+
+    </div>
+
+    <!-- ACTION BUTTONS (kept OUTSIDE so always visible) -->
+    <div class="modal-actions">
+        <button type="button" onclick="createTask()">Create</button>
+        <button type="button" onclick="closeModal()">Cancel</button>
+    </div>
+
+</div>
+    </div>
+
+</div>
+
+<!-- XP POPUP -->
+<div id="xpPopup"></div>
+
+<script src="app.js"></script>
+
+<!-- CLICK OUTSIDE DROPDOWN -->
+<script>
+document.addEventListener("click", function(e) {
+    const menu = document.getElementById("taskMenu");
+    const button = document.querySelector(".task-dropdown button");
+
+    if (!menu.contains(e.target) && !button.contains(e.target)) {
+        menu.classList.add("hidden");
+    }
+});
+</script>
+
+<!-- CLICK OUTSIDE MODAL -->
+<script>
+document.getElementById("taskModal").addEventListener("click", function(e) {
+    if (e.target.id === "taskModal") {
+        closeModal();
+    }
+});
+</script>
+
+</body>
+</html>

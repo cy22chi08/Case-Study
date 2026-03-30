@@ -1,0 +1,784 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #0e0e10, #121216);
+    color: white;
+}
+
+/* LAYOUT */
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 270px;
+    background: #151518;
+    padding: 20px;
+    border-right: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* LOGO */
+.logo {
+    font-size: 22px;
+    color: #ff3b3b;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* PROFILE CARD */
+.profile-card {
+    background: #1c1c20;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 59, 59, 0.2);
+}
+
+/* AVATAR */
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #2a2a2a;
+    margin: 0 auto 10px;
+    border: 3px solid #ff3b3b;
+    background-size: cover;
+    background-position: center;
+}
+
+/* NAME */
+.profile-card h3 {
+    margin: 10px 0;
+}
+
+/* CLASS TEXT */
+.class {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+/* STATS */
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+/* XP BAR */
+.xp-bar {
+    height: 10px;
+    background: #333;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+#xpFill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff3b3b, #ff7b7b);
+    transition: width 0.6s ease;
+}
+
+/* LOGOUT */
+.logout {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: #ff3b3b;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout:hover {
+    background: #ff1f1f;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 25px;
+}
+
+/* TITLE */
+.main h1 {
+    margin-bottom: 20px;
+}
+
+/* INPUT */
+.input-box {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.input-box input,
+.input-box select {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #1c1c20;
+    color: white;
+}
+
+.input-box button {
+    background: #ff3b3b;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.input-box button:hover {
+    transform: scale(1.05);
+}
+
+/* PANELS */
+.panel {
+    background: #1a1a1e;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* TASK LIST */
+li {
+    background: #222;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+li:hover {
+    transform: scale(1.02);
+    background: #2a2a2a;
+}
+
+/* CHECKBOX */
+input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+/* RARITY COLORS */
+.common { border-left: 4px solid gray; }
+.rare { border-left: 4px solid #3aa0ff; }
+.epic { border-left: 4px solid #b84dff; }
+
+/* COMPLETE BUTTON */
+.complete {
+    margin-top: 10px;
+    background: #28a745;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.complete:hover {
+    background: #1f8f3a;
+    transform: scale(1.03);
+}
+
+/* HISTORY */
+#historyList li {
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+/* XP POPUP */
+#xpPopup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff3b3b;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: none;
+    animation: pop 0.5s ease;
+}
+
+/* =========================
+   AUTH PAGE (LOGIN / REGISTER)
+========================= */
+
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CONTAINER */
+.auth-container {
+    text-align: center;
+}
+
+/* TITLE */
+.auth-title {
+    color: #ff3b3b;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 59, 59, 0.4);
+}
+
+/* LOGIN BOX */
+.auth-box {
+    background: #1c1c20;
+    padding: 30px;
+    border-radius: 15px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+/* INPUTS */
+.auth-box input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #2a2a2a;
+    color: white;
+}
+
+/* BUTTONS */
+.primary-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #ff3b3b;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    background: #ff1f1f;
+    transform: scale(1.05);
+}
+
+/* REGISTER BUTTON */
+.secondary-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #ff3b3b;
+    color: #ff3b3b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.secondary-btn:hover {
+    background: #ff3b3b;
+    color: white;
+}
+
+/* MESSAGE */
+#msg {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* =========================
+   MODAL (FIXED - NO DUPLICATES)
+========================= */
+
+/* BACKDROP */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.modal-content {
+    width: 500px;
+
+    max-height: 85vh;
+
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden; /* important */
+}
+
+.modal-scroll {
+    max-height: 60vh;
+    overflow-y: auto;   /* vertical scroll ONLY */
+    overflow-x: hidden; /* 🚨 prevents horizontal scroll */
+
+    padding-right: 8px;
+}
+
+/* ANIMATION */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.modal-step {
+    background: #1c1c20;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 0 20px rgba(255,59,59,0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+/* INPUT */
+.modal-step input {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: none;
+    background: #2a2a2a;
+    color: white;
+}
+
+/* BUTTON */
+.modal-step button {
+    background: #ff3b3b;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-step button:hover {
+    transform: scale(1.05);
+}
+
+/* GRID */
+.card-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* CARD */
+.card {
+    background: #222;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 90px;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #ff3b3b;
+}
+
+/* PROFILE SETUP */
+/* =========================
+   PROFILE SETUP (UPGRADED THEME)
+========================= */
+
+.profile-setup {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #1a1a1e;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 59, 59, 0.25);
+    text-align: center;
+    animation: pop 0.4s ease;
+}
+
+.profile-setup h1 {
+    color: #ff3b3b;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-shadow: 0 0 10px rgba(255, 59, 59, 0.4);
+}
+
+/* INPUTS */
+.profile-setup input,
+.profile-setup select {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+    outline: none;
+    transition: 0.2s;
+}
+
+.profile-setup input:focus,
+.profile-setup select:focus {
+    border-color: #ff3b3b;
+    box-shadow: 0 0 10px rgba(255, 59, 59, 0.3);
+}
+
+/* BUTTON */
+.profile-setup button {
+    width: 95%;
+    padding: 12px;
+    margin-top: 15px;
+    background: linear-gradient(90deg, #ff3b3b, #ff6b6b);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.profile-setup button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 59, 59, 0.4);
+}
+
+/* STEPS */
+.step {
+    display: none;
+    text-align: center;
+}
+
+.step.active {
+    display: block;
+}
+
+/* CARD SELECTION */
+.card-container {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #1c1c20;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 120px;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card.selected {
+    border: 2px solid #ff3b3b;
+}
+
+/* =========================
+   TASK DROPDOWN MENU
+========================= */
+
+.task-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background: #1c1c20;
+    border: 1px solid #333;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.dropdown-menu div {
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.dropdown-menu div:hover {
+    background: #2a2a2a;
+}
+
+/* =========================
+   MODAL INPUTS (TASK FORM)
+========================= */
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+}
+
+.modal-content textarea {
+    resize: none;
+    height: 60px;
+}
+
+/* =========================
+   MODAL BUTTONS
+========================= */
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-actions button:first-child {
+    background: #ff3b3b;
+    color: white;
+}
+
+.modal-actions button:last-child {
+    background: #333;
+    color: white;
+}
+
+/* =========================
+   TAG BUTTONS
+========================= */
+
+.tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tags button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #1c1c20;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tags button:hover {
+    background: #2a2a2a;
+}
+
+.tags button.active {
+    background: #ff3b3b;
+    border-color: #ff3b3b;
+}
+
+/* =========================
+   CHECKLIST INPUT
+========================= */
+
+.check-item {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.check-item input {
+    flex: 1;
+}
+
+/* =========================
+   TASK CATEGORY COLORS
+========================= */
+
+.todo-task {
+    border-left: 4px solid #3aa0ff;
+}
+
+.daily-task {
+    border-left: 4px solid #28a745;
+}
+
+.habit-task {
+    border-left: 4px solid #b84dff;
+}
+
+.todo { border-left: 4px solid #3aa0ff; }
+.daily { border-left: 4px solid #28a745; }
+.habit { border-left: 4px solid #ff3b3b; }
+
+.panel h2 {
+    color: #ff3b3b;
+    margin-bottom: 10px;
+}
+
+#xpPopup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #ff3b3b, #ff6b6b);
+    padding: 12px 18px;
+    border-radius: 10px;
+    display: none;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255,59,59,0.5);
+    transition: opacity 0.4s ease;
+}
+
+.sub-checklist {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #bbb;
+}
+
+.checklist-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.checklist-item input {
+    flex: 1;
+}
+
+.remove-btn {
+    background: #ff3b3b;
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+
+    justify-content: center;  /* ✅ centers the buttons */
+
+    margin-bottom: 25px;       /* ✅ space below buttons */
+    margin-top: 10px;          /* optional breathing space above */
+}
+
+/* shared button styling */
+.task-actions button {
+    height: 42px;
+    padding: 0 14px;
+    font-size: 14px;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    white-space: nowrap;
+}
+
+/* Add Task button */
+.task-dropdown > button {
+    background: #ff3b3b;
+    color: white;
+}
+
+/* Complete button */
+.complete-btn {
+    background: #2ea100;
+    color: white;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .main {
+        padding: 15px;
+    }
+}

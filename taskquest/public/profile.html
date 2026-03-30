@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Setup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="profile-setup">
+
+    <h1>⚔ Create Your Identity</h1>
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step1">
+        <h2>What should we call you?</h2>
+        <input id="name" placeholder="Enter your name">
+        <button onclick="nextStep(2)">Next</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step2">
+        <h2>Pick your class</h2>
+
+        <div class="card-container">
+            <div class="card" onclick="selectClass('student', this)">
+                <img src="images/student_male.jpg">
+                <p>Student</p>
+            </div>
+
+            <div class="card" onclick="selectClass('nerd', this)">
+                <img src="images/nerd_male.jpg">
+                <p>Nerd</p>
+            </div>
+
+            <div class="card" onclick="selectClass('gymrat', this)">
+                <img src="images/gymrat_male.jpg">
+                <p>Gymrat</p>
+            </div>
+        </div>
+
+        <button onclick="nextStep(1)">Back</button>
+        <button onclick="nextStep(3)">Next</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step3">
+        <h2>Pick your avatar</h2>
+
+        <div class="card-container" id="avatarOptions"></div>
+
+        <button onclick="nextStep(2)">Back</button>
+        <button onclick="saveProfile()">Finish</button>
+    </div>
+
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+if (!user) window.location = "login.html";
+
+let selectedClass = "";
+let selectedAvatar = "";
+
+/* STEP NAVIGATION */
+function nextStep(step) {
+
+    // STEP 1 → STEP 2 validation
+    if (step === 2) {
+        const name = document.getElementById("name").value.trim();
+
+        if (!name) {
+            alert("⚠ Please enter your name!");
+            return;
+        }
+    }
+
+    // STEP 2 → STEP 3 validation
+    if (step === 3) {
+        if (!selectedClass) {
+            alert("⚠ Please select a class!");
+            return;
+        }
+    }
+
+    // SWITCH STEPS
+    document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+    document.getElementById("step" + step).classList.add("active");
+
+    // LOAD AVATARS ONLY WHEN ENTERING STEP 3
+    if (step === 3) {
+        loadAvatars();
+    }
+}
+
+/* SELECT CLASS */
+function selectClass(cls, el) {
+    selectedClass = cls;
+    selectedAvatar = "";
+
+    document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
+    el.classList.add("selected");
+}
+
+/* LOAD AVATAR OPTIONS */
+function loadAvatars() {
+    const container = document.getElementById("avatarOptions");
+
+    const avatars = [
+        `${selectedClass}_male.jpg`,
+        `${selectedClass}_female.jpg`
+    ];
+
+    container.innerHTML = "";
+
+    avatars.forEach(av => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+
+        div.innerHTML = `
+            <img src="images/${av}">
+            <p>${av.replace(".jpg", "")}</p>
+        `;
+
+        div.onclick = () => {
+            selectedAvatar = av;
+
+            document.querySelectorAll("#avatarOptions .card")
+                .forEach(c => c.classList.remove("selected"));
+
+            div.classList.add("selected");
+        };
+
+        container.appendChild(div);
+    });
+}
+
+/* SAVE PROFILE */
+async function saveProfile() {
+    const name = document.getElementById("name").value;
+
+    if (!name || !selectedClass || !selectedAvatar) {
+        alert("Complete all steps!");
+        return;
+    }
+
+    const res = await fetch("http://localhost:3000/user/update-profile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            id: user.id,
+            name: name,
+            class: selectedClass,
+            avatar: selectedAvatar
+        })
+    });
+
+    const text = await res.text();
+    alert(text);
+
+    window.location = "dashboard.html";
+}
+</script>
+
+</body>
+</html>
